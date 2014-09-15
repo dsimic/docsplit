@@ -123,10 +123,15 @@ def split_doc(inputfile):
     Splits pdf or libreoffice importable doc (.doc, .docx, etc),
     into pdfs, one pdf per page.
     """
+    rm_orig = False
     inputfile_suff = inputfile.split(".")[-1]
     if inputfile_suff != "pdf":
+        rm_orig = True
         inputfile = libre_doc_to_pdf(inputfile)
-    return split_pdf(inputfile)
+    outpdfs = split_pdf(inputfile)
+    if rm_orig:
+        os.remove(inputfile)
+    return outpdfs
 
 
 def write_pdfs(inputfile, pages, outdir=None):
