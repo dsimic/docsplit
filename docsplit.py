@@ -1,7 +1,22 @@
 #! /usr/bin/env python
 """
 Script for splitting pdf, .doc and .docx files.
-Copyright 2014 David Simic.
+
+
+Copyright 2014 David Simic
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
 """
 from pyPdf import PdfFileWriter, PdfFileReader
 from subprocess import call
@@ -12,6 +27,8 @@ import os
 
 # ghostscript command schema
 GS_CMD = "gs -o %s -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress %s"
+# unoconv command schema
+UNOCONV_CMD = 'unoconv -f pdf %s'
 
 
 def fix_pdf(inputfile):
@@ -34,6 +51,8 @@ def fix_pdf(inputfile):
         return
     # hopefully will work this time
     inputpdf = PdfFileReader(open(inputfile_fixed, "rb"))
+    # remove trace of fixed
+    os.remove(inputfile_fixed)
     return inputpdf
 
 
@@ -80,10 +99,17 @@ def libre_doc_to_pdf(inputfile):
     """
     # convert ms .doc and .docx to pdf using libreoffice daemon
     try:
-        call(['unoconv', '-f', 'pdf', inputfile])
+        print "INFO: Calling unoconv ..."
+        cmd = UNOCONV_CMD % inputfile
+        print ">> %s" % cmd
+        call(cmd.split())
     except OSError, e:
-        print 'unoconv not present, cannot convert .doc or .docx'
-        return 
+        print traceback.format_exc()
+        print sys.exc_info()[0]
+        print >> sys.stderr, \
+                "ERROR: Call to unoconv went wrong, "+\
+                "check if installed."
+        return
 
     if "." not in inputfile:
         pdffile = inputfile + ".pdf"
