@@ -1,14 +1,15 @@
 docsplit
 ========
 
-Python script for splitting .pdf, .doc, .docx and other libreoffice importable documents into single page pdfs.
+Python script for splitting .pdf, .doc, .docx and a few other document types into single page pdfs.
 
 It depends on ghostscript (for fixing pdfs) and unoconv (a command line 'front-end' for accessing libreoffice). 
 
 Install
 -------
 
-If you are on Ubuntu just run the ./install_deps.sh script.
+If you are on Ubuntu just run the ./install_deps.sh script. If you are on
+another Linux distro, install the dependencies described in install_deps.sh.
 
 
 Usage
