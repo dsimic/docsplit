@@ -8,8 +8,7 @@ It depends on ghostscript (for fixing pdfs) and unoconv (a command line 'front-e
 Install
 -------
 
-If you are on Ubuntu just run the ./install_deps.sh script. If you are on
-another Linux distro, install the dependencies described in install_deps.sh.
+If you are on Ubuntu just run the ./install_deps.sh script in sudo. If you are on another Linux distro, install the dependencies described in install_deps.sh.
 
 
 Usage
