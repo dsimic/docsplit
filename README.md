@@ -17,3 +17,15 @@ Usage
 For usage, simply run docsplit.py:
 
 python docsplit.py --help
+
+usage: docsplit.py [-h] [--outdir OUTDIR] docfile
+
+A script for splitting a .pdf, .doc, .docx and other documents into one pdf
+per page
+
+positional arguments:
+  docfile          path to docfile
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --outdir OUTDIR  override default outdir(default is same dir as docfile)
