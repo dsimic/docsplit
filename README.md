@@ -29,3 +29,13 @@ positional arguments:
 optional arguments:
   -h, --help       show this help message and exit
   --outdir OUTDIR  override default outdir(default is same dir as docfile)
+
+Examples
+--------
+
+After all dependencies have been install and you ahve verified that
+
+python docsplit --help
+
+does not crash and burn - run "./examples.sh" for a few examples. This script
+splits the docs in the ./test/ subdir. 
