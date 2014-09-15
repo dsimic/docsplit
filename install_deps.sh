@@ -1,8 +1,11 @@
 #! /bin/bash
 
-# Install python deps
+# Install pip
+apt-get -y install pip
 
+# Install python deps
 pip install -r ./requirements.txt
 
-apt-get install -y ghostscript
-apt-get install -y unoconv
+# Install ghostscript, unoconv
+apt-get -y install ghostscript
+apt-get -y install unoconv
