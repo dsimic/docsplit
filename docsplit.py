@@ -3,7 +3,7 @@
 Script for splitting pdf, .doc and .docx files.
 
 
-Copyright 2014 David Simic
+Copyright 2014 David Simic <dpsimic at gmail dot com>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -51,8 +51,9 @@ def fix_pdf(inputfile):
         return
     # hopefully will work this time
     inputpdf = PdfFileReader(open(inputfile_fixed, "rb"))
-    # remove trace of fixed
-    os.remove(inputfile_fixed)
+    # remove inputfile_fixed
+    if os.path.isfile(inputfile_fixed):
+        os.remove(inputfile_fixed)
     return inputpdf
 
 
@@ -129,7 +130,7 @@ def split_doc(inputfile):
         rm_orig = True
         inputfile = libre_doc_to_pdf(inputfile)
     outpdfs = split_pdf(inputfile)
-    if rm_orig:
+    if rm_orig and os.path.isfile(inputfile):
         os.remove(inputfile)
     return outpdfs
 

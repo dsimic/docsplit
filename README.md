@@ -35,7 +35,7 @@ Examples
 
 After all dependencies have been install and you ahve verified that
 
-python docsplit --help
+python docsplit.py --help
 
-does not crash and burn - run "./examples.sh" for a few examples. This script
-splits the docs in the ./test/ subdir. 
+does not crash and burn, run "./examples.sh" for a few examples. This script
+will split the docs in the ./test/ subdir. 

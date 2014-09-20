@@ -1,6 +1,8 @@
 OUTROOT=./test/tmp/
 # clean OUTROOT
-rm -rf $OUTROOT
+if [ -d $OUTROOT ]; then
+    rm -rf $OUTROOT
+fi
 
 python docsplit.py test/a.pdf --outdir $OUTROOT/a/ 
 
