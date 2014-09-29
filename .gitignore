@@ -62,3 +62,6 @@ tmp
 
 # .fixed. (docsplit specfic)- TODO: Fix this hack.
 *.fixed.*
+
+# rope
+.ropeproject

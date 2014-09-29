@@ -42,12 +42,12 @@ def fix_pdf(inputfile):
         cmd = GS_CMD % (inputfile_fixed, inputfile)
         print ">> %s" % cmd
         call(cmd.split())
-    except OSError, e:
+    except OSError:
         print traceback.format_exc()
         print sys.exc_info()[0]
         print >> sys.stderr, \
-                "ERROR: Call to ghostscript went wrong, "+\
-                "check if installed."
+            "ERROR: Call to ghostscript went wrong, " + \
+            "check if installed."
         return
     # hopefully will work this time
     inputpdf = PdfFileReader(open(inputfile_fixed, "rb"))
@@ -104,12 +104,11 @@ def libre_doc_to_pdf(inputfile):
         cmd = UNOCONV_CMD % inputfile
         print ">> %s" % cmd
         call(cmd.split())
-    except OSError, e:
+    except OSError:
         print traceback.format_exc()
         print sys.exc_info()[0]
         print >> sys.stderr, \
-                "ERROR: Call to unoconv went wrong, "+\
-                "check if installed."
+            "ERROR: Call to unoconv went wrong, check if installed."
         return
 
     if "." not in inputfile:
@@ -129,6 +128,9 @@ def split_doc(inputfile):
     if inputfile_suff != "pdf":
         rm_orig = True
         inputfile = libre_doc_to_pdf(inputfile)
+    if inputfile is None:
+        print "ERROR: File cannot be converted, exiting."
+        return
     outpdfs = split_pdf(inputfile)
     if rm_orig and os.path.isfile(inputfile):
         os.remove(inputfile)
@@ -159,9 +161,9 @@ if __name__ == '__main__':
         " a .pdf, .doc, .docx and other documents into one pdf per page")
     parser.add_argument("docfile", help="path to docfile",
                         type=str)
-    parser.add_argument("--outdir", help="override default outdir" +\
-            "(default is same dir as docfile)",
-            type=str, required=None, default=None)
+    parser.add_argument("--outdir", help="override default outdir" +
+                        "(default is same dir as docfile)",
+                        type=str, required=None, default=None)
     args = parser.parse_args()
 
     # split pages
